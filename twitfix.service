@@ -1,13 +1,12 @@
 [Unit]
-Description=Init file for twitfix uwsgi instance
+Description=Gunicorn instance to serve Twxtter
 After=network.target
 
 [Service]
-User=robin
-Group=robin
-WorkingDirectory=/home/robin/twitfix
-Environment="PATH=/home/robin/twitfix/twitfixenv/bin"
-ExecStart=/home/robin/twitfix/twitfixenv/bin/uwsgi --ini twitfix.ini
+User=ss13
+Group=www-data
+WorkingDirectory=/srv/Twxtter-main
+ExecStart=/home/ss13/.local/lib/python3.8/site-packages/gunicorn --workers 3 --bind unix:twxtter.sock -m 007 wsgi:app
 
 [Install]
 WantedBy=multi-user.target
