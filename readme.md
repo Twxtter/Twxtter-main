@@ -51,13 +51,6 @@ Twxtter generates a config.json in its root directory the first time you run it,
 This project is licensed under the **Do What The Fuck You Want Public License**
 
 
-
-## Other stuff
-
-We check for t.co links in non video tweets, and if one is found, we direct the discord useragent to embed that link directly, this means that twitter links containing youtube / vimeo links will automatically embed those as if you had just directly linked to that content
-
-
-
 ## Other stuff
 
 Going to `https://twxtter.com/latest/` will present a page that shows the all the latest tweets that were added to the database, use with caution as results may be nsfw! Current page created by @DorukSaga
