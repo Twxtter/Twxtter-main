@@ -74,4 +74,4 @@ Using `/api/stats/` will return a json with some stats about TwitFix's activity 
 Advanced embeds are provided via a `/oembed.json?` endpoint - This is manually pointing at my server in `/templates/index.html` and should be changed from `https://twxtter.com/` to whatever your domain is
 
 # NOTICE
-## This is _**NOT**_ actively monitored by anyone working on Twxtter. All tweets are public ally accessible.
+## This is _**NOT**_ actively monitored by anyone working on Twxtter. All tweets are publicly accessible.
