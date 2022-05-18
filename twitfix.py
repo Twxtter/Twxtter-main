@@ -822,10 +822,10 @@ def embed(video_link, vnf, image, raw=False):
         )
         template = "video.html"
 
-    color = "#7FFFD4"  # Green
+    color = config['config']['color']
 
     if vnf["nsfw"] == True:
-        color = "#800020"  # Red
+        color = config['config']['color']
 
     return render_template(
         template,
