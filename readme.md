@@ -1,6 +1,6 @@
 # Twxtter/sixFix
 (A fork of TwitFix)
-Basic flask server that serves fixed twitter video embeds to desktop discord by using either the Twitter API or Youtube-DL to grab tweet video information. This also automatically embeds the first link in the text of non video tweets (API Only)
+Basic flask server that serves fixed twitter video embeds to desktop discord by using either the Twitter API or Youtube-DL to grab tweet video information.
 
 Regarding what happened to TwitFix: http://blog.hirob.in/2022-05-16-Goodbye-TwitFix/
 
