@@ -286,10 +286,10 @@ def twitfix(sub_path):
     print(request.url)
 
     if request.url.startswith(
-        "https://d.fx"
+        "https://d.twx"
     ):  # Matches d.fx? Try to give the user a direct link
         if user_agent in generate_embed_user_agents:
-            print(" ➤ [ D ] d.fx link shown to discord user-agent!")
+            print(" ➤ [ D ] d.twx link shown to discord user-agent!")
             if request.url.endswith(".mp4") and "?" not in request.url:
                 return dl(sub_path)
             else:
@@ -297,7 +297,7 @@ def twitfix(sub_path):
                     "To use a direct MP4 link in discord, remove anything past '?' and put '.mp4' at the end"
                 )
         else:
-            print(" ➤ [ R ] Redirect to MP4 using d.fxtwitter.com")
+            print(" ➤ [ R ] Redirect to MP4 using d.twxtter.com")
             return dir(sub_path)
 
     elif request.url.endswith(".mp4") or request.url.endswith("%2Emp4"):
@@ -433,13 +433,13 @@ def dl(sub_path):
         print(" ➤ [[ FILE DOES NOT EXIST, DOWNLOADING... ]]")
         addToStat("downloads")
         mp4file = urllib.request.urlopen(mp4link)
-        with open(("/home/robin/twitfix/static/" + filename), "wb") as output:
+        with open(("/srv/Twxtter-main/static/" + filename), "wb") as output:
             output.write(mp4file.read())
 
     print(
         " ➤ [[ PRESENTING FILE: "
         + filename
-        + ", URL: https://fxtwitter.com/static/"
+        + ", URL: https://twxtter.com/static/"
         + filename
         + " ]]"
     )
