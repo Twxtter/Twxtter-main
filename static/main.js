@@ -70,7 +70,7 @@ function forNow() {
 function fetchNApply(page) {
     try {
         loading = true;
-        fetch(`https://fxtwitter.com/api/latest/?tweets=10&page=${page}`)
+        fetch(`https://twxtter.com/api/latest/?tweets=10&page=${page}`)
             .then(response => response.json())
             .then(data => {
                 data.forEach(e => createTweet(e));
@@ -265,7 +265,7 @@ function createTweet(json) {
         const rts = createEl("div", "cont", { inner: `${json["rts"]} Retweets` });
         const lks = createEl("div", "cont", { inner: `${json["likes"]} Likes` });
 
-        const share = createEl("img", "share", { src: "https://fxtwitter.com/copy.svg" });
+        const share = createEl("img", "share", { src: "https://twxtter.com/copy.svg" });
 
         meta.appendChild(rts);
         meta.appendChild(lks);
@@ -277,7 +277,7 @@ function createTweet(json) {
             imgPrev(img);
         });
         share.addEventListener("click", () =>
-            navigator.clipboard.writeText(json["tweet"].replace("https://t", "https://fxt"))
+            navigator.clipboard.writeText(json["tweet"].replace("https://twi", "https://twx"))
         );
 
         tweetCount++;

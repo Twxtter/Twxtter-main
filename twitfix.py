@@ -23,6 +23,10 @@ import urllib.parse
 import urllib.request
 from datetime import date
 
+class TwitterUserProtected(Exception):
+    pass
+
+
 app = Flask(__name__)
 CORS(app)
 
@@ -286,10 +290,10 @@ def twitfix(sub_path):
     print(request.url)
 
     if request.url.startswith(
-        "https://d.fx"
+        "https://d.twx"
     ):  # Matches d.fx? Try to give the user a direct link
         if user_agent in generate_embed_user_agents:
-            print(" ➤ [ D ] d.fx link shown to discord user-agent!")
+            print(" ➤ [ D ] d.twx link shown to discord user-agent!")
             if request.url.endswith(".mp4") and "?" not in request.url:
                 return dl(sub_path)
             else:
@@ -297,7 +301,7 @@ def twitfix(sub_path):
                     "To use a direct MP4 link in discord, remove anything past '?' and put '.mp4' at the end"
                 )
         else:
-            print(" ➤ [ R ] Redirect to MP4 using d.fxtwitter.com")
+            print(" ➤ [ R ] Redirect to MP4 using d.twxtter.com")
             return dir(sub_path)
 
     elif request.url.endswith(".mp4") or request.url.endswith("%2Emp4"):
@@ -433,13 +437,13 @@ def dl(sub_path):
         print(" ➤ [[ FILE DOES NOT EXIST, DOWNLOADING... ]]")
         addToStat("downloads")
         mp4file = urllib.request.urlopen(mp4link)
-        with open(("/home/robin/twitfix/static/" + filename), "wb") as output:
+        with open(("/srv/Twxtter-main/static/" + filename), "wb") as output:
             output.write(mp4file.read())
 
     print(
         " ➤ [[ PRESENTING FILE: "
         + filename
-        + ", URL: https://fxtwitter.com/static/"
+        + ", URL: https://twxtter.com/static/"
         + filename
         + " ]]"
     )
@@ -493,6 +497,8 @@ def direct_video(video_link):  # Just get a redirect to a MP4 link from any twee
             addVnfToLinkCache(video_link, vnf)
             return redirect(vnf["url"], 301)
             print(" ➤ [ D ] Redirecting to direct URL: " + vnf["url"])
+        except TwitterUserProtected:
+            return message("This user is guarding their tweets!")
         except Exception as e:
             print(e)
             return message("Failed to scan your link!")
@@ -511,6 +517,8 @@ def direct_video_link(
             addVnfToLinkCache(video_link, vnf)
             return vnf["url"]
             print(" ➤ [ D ] Redirecting to direct URL: " + vnf["url"])
+        except TwitterUserProtected:
+            return message("This user is guarding their tweets!")
         except Exception as e:
             print(e)
             return message("Failed to scan your link!")
@@ -600,6 +608,13 @@ def link_to_vnf_from_api(video_link):
     tweet = twitter_api.statuses.show(_id=twid, tweet_mode="extended")
     # For when I need to poke around and see what a tweet looks like
     # print(tweet)
+    protected = tweet['user']['protected']
+    if protected:
+        raise TwitterUserProtected()
+
+    text = tweet["full_text"]
+    nsfw = tweet.get("possibly_sensitive", False)
+    qrt = {}
     imgs = ["", "", "", "", ""]
     print(" ➤ [ + ] Tweet Type: " + tweetType(tweet))
     # Check to see if tweet has a video, if not, make the url passed to the VNF the first t.co link in the tweet
@@ -630,8 +645,6 @@ def link_to_vnf_from_api(video_link):
         url = ""
         images = imgs
         thumb = tweet["extended_entities"]["media"][0]["media_url_https"]
-
-    qrt = {}
 
     if "quoted_status" in tweet:
         qrt["desc"] = tweet["quoted_status"]["full_text"]
@@ -683,6 +696,9 @@ def link_to_vnf(video_link):  # Return a VideoInfo object or die trying
     if config["config"]["method"] == "hybrid":
         try:
             return link_to_vnf_from_api(video_link)
+        except TwitterUserProtected:
+            print(" ➤ [ X ] User is protected, stop.")
+            raise
         except Exception as e:
             print(" ➤ [ !!! ] API Failed")
             print(e)
@@ -690,6 +706,9 @@ def link_to_vnf(video_link):  # Return a VideoInfo object or die trying
     elif config["config"]["method"] == "api":
         try:
             return link_to_vnf_from_api(video_link)
+        except TwitterUserProtected:
+            print(" ➤ [ X ] User is protected, stop.")
+            raise
         except Exception as e:
             print(" ➤ [ X ] API Failed")
             print(e)
