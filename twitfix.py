@@ -844,7 +844,7 @@ def embed(video_link, vnf, image, raw=False):
     color = config['config']['color']
 
     if vnf["nsfw"] == True:
-        color = "#80020" # Red
+        color = "#800020" # Red
 
     return render_template(
         template,
