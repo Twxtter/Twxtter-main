@@ -23,9 +23,6 @@ import urllib.parse
 import urllib.request
 from datetime import date
 
-class TwitterUserProtected(Exception):
-    pass
-
 
 app = Flask(__name__)
 CORS(app)
@@ -488,8 +485,6 @@ def direct_video(video_link):  # Just get a redirect to a MP4 link from any twee
             addVnfToLinkCache(video_link, vnf)
             return redirect(vnf["url"], 301)
             print(" ➤ [ D ] Redirecting to direct URL: " + vnf["url"])
-        except TwitterUserProtected:
-            return message("This user is guarding their tweets!")
         except Exception as e:
             print(e)
             return message("Failed to scan your link!")
@@ -508,8 +503,6 @@ def direct_video_link(
             addVnfToLinkCache(video_link, vnf)
             return vnf["url"]
             print(" ➤ [ D ] Redirecting to direct URL: " + vnf["url"])
-        except TwitterUserProtected:
-            return message("This user is guarding their tweets!")
         except Exception as e:
             print(e)
             return message("Failed to scan your link!")
@@ -599,10 +592,6 @@ def link_to_vnf_from_api(video_link):
     tweet = twitter_api.statuses.show(_id=twid, tweet_mode="extended")
     # For when I need to poke around and see what a tweet looks like
     # print(tweet)
-    protected = tweet['user']['protected']
-    if protected:
-        raise TwitterUserProtected()
-
     text = tweet["full_text"]
     nsfw = tweet.get("possibly_sensitive", False)
     qrt = {}
@@ -687,9 +676,6 @@ def link_to_vnf(video_link):  # Return a VideoInfo object or die trying
     if config["config"]["method"] == "hybrid":
         try:
             return link_to_vnf_from_api(video_link)
-        except TwitterUserProtected:
-            print(" ➤ [ X ] User is protected, stop.")
-            raise
         except Exception as e:
             print(" ➤ [ !!! ] API Failed")
             print(e)
@@ -697,9 +683,6 @@ def link_to_vnf(video_link):  # Return a VideoInfo object or die trying
     elif config["config"]["method"] == "api":
         try:
             return link_to_vnf_from_api(video_link)
-        except TwitterUserProtected:
-            print(" ➤ [ X ] User is protected, stop.")
-            raise
         except Exception as e:
             print(" ➤ [ X ] API Failed")
             print(e)
