@@ -480,15 +480,6 @@ def dir(sub_path):
         return redirect(url, 301)
 
 
-@app.route("/favicon.ico")  # This shit don't work
-def favicon():
-    return send_from_directory(
-        os.path.join(app.root_path, "static"),
-        "favicon.ico",
-        mimetype="image/vnd.microsoft.icon",
-    )
-
-
 def direct_video(video_link):  # Just get a redirect to a MP4 link from any tweet link
     cached_vnf = getVnfFromLinkCache(video_link)
     if cached_vnf == None:
@@ -564,7 +555,7 @@ def embed_video(video_link, image=0, raw=False):  # Return Embed from any tweet 
 
 
 def tweetInfo(
-    url,
+    url="",
     tweet="",
     desc="",
     thumb="",
