@@ -434,7 +434,7 @@ def dl(sub_path):
         print(" ➤ [[ FILE DOES NOT EXIST, DOWNLOADING... ]]")
         addToStat("downloads")
         mp4file = urllib.request.urlopen(mp4link)
-        with open(("/srv/Twxtter-main/static/" + filename), "wb") as output:
+        with open(("/home/twitfix/Twxtter-main/static/" + filename), "wb") as output:
             output.write(mp4file.read())
 
     print(
