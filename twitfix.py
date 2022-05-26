@@ -755,7 +755,6 @@ def embed(video_link, vnf, image, raw=False):
     urlDesc = urllib.parse.quote(desc)
     urlLink = urllib.parse.quote(video_link)
     likeDisplay = "\n\n💖 " + str(vnf["likes"]) + " 🔁 " + str(vnf["rts"]) + "\n"
-    imagecount = "Twitter"
 
     try:
         if vnf["type"] == "":
@@ -780,7 +779,6 @@ def embed(video_link, vnf, image, raw=False):
         vnf["rts"] = 0
         vnf["time"] = 0
         print(" ➤ [ X ] Failed QRT check - old VNF object")
-
     appNamePost = ""
     if vnf["type"] == "Text":  # Change the template based on tweet type
         template = "text.html"
@@ -788,8 +786,6 @@ def embed(video_link, vnf, image, raw=False):
         if vnf["images"][4] != "1":
             appNamePost = " - Image " + str(image+1) + "/" + str(vnf["images"][4])
         image = vnf["images"][image]
-        if vnf["images"][4] != "1":
-            imagecount = "Twitter (" + vnf["images"][4] + " images in post)"
         if raw == True:
             template = "img.html"
         else:
@@ -821,7 +817,6 @@ def embed(video_link, vnf, image, raw=False):
         vidurl=vnf["url"],
         desc=desc,
         pic=image,
-        imagecount=imagecount,
         user=vnf["uploader"],
         video_link=video_link,
         color=color,
