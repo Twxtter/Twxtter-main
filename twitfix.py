@@ -349,7 +349,7 @@ def twitfix(sub_path):
         return embed_video(clean, image)
 
     elif (
-        request.url.endswith("/1p", "/2p", "/3p", "/4p", "%2F1p", "%2F2p", "%2F3p", "%2F4p")
+        request.url.endswith(("/1p", "/2p", "/3p", "/4p", "%2F1p", "%2F2p", "%2F3p", "%2F4p"))
     ):
         twitter_url = "https://twitter.com/" + sub_path
 
