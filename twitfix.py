@@ -336,7 +336,7 @@ def twitfix(sub_path):
             )
 
     elif (
-        request.url.endswith("/1", "/2", "/3", "/4", "%2F1", "%2F2", "%2F3", "%2F4")
+        request.url.endswith(("/1", "/2", "/3", "/4", "%2F1", "%2F2", "%2F3", "%2F4"))
     ):
         twitter_url = "https://twitter.com/" + sub_path
 
