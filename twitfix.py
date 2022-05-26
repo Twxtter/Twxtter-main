@@ -596,6 +596,7 @@ def link_to_vnf_from_api(video_link):
                     and video["bitrate"] > best_bitrate
                 ):
                     url = video["url"]
+                    best_bitrate = video['bitrate']
     elif tweetType(tweet) == "Text":
         url = ""
         thumb = ""
@@ -830,6 +831,7 @@ def embed(video_link, vnf, image, raw=False):
         urlDesc=urlDesc,
         urlUser=urlUser,
         urlLink=urlLink,
+        tweetLink=vnf['tweet']
     )
 
 
