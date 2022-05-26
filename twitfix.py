@@ -785,6 +785,7 @@ def embed(video_link, vnf, image, raw=False):
     if vnf["type"] == "Image":
         if vnf["images"][4] != "1":
             appNamePost = " - Image " + str(image+1) + "/" + str(vnf["images"][4])
+            print(f" ➤ [ T ] Setting appNamePost to {appNamePost}")
         image = vnf["images"][image]
         if raw == True:
             template = "img.html"
