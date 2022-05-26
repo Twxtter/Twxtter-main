@@ -807,7 +807,7 @@ def embed(video_link, vnf, image, raw=False):
 
     if vnf["nsfw"] == True:
         color = "#800020" # Red
-
+    print(f'{appNamePost=}')
     return render_template(
         template,
         likes=vnf["likes"],
