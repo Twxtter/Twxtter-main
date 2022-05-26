@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
 <!-- 
-    {{ color }}   - Custom Color Code set in the Twxtter Config
-    {{ appname }} - Custom Appname set in the Twxtter Config
-    {{ user }}    - Username of the Source Tweet
-    {{ pic }}     - Thumbnail Image for a given video
-    {{ vidlink }} - Direct link back to the source tweet
-    {{ vidurl }}  - Direct MP4 link to the video contained in the tweet
-    {{ desc }}    - Tweet Text
-    {{ url }}     - Base URL of the site hosting Twxtter
-    {{ urlDesc }} - HTTP Encoded Tweet Text
-    {{ urlUser }} - HTTP Encoded Username
-    {{ urlLink }} - HTTP Encoded source link
-    {{ pfp }}     - URL of the posters PFP
+    {{ color }}      - Custom Color Code set in the TwitFix Config
+    {{ appname }}    - Custom Appname set in the TwitFix Config
+    {{ user }}       - Username of the Source Tweet
+    {{ pic }}        - Thumbnail Image for a given video
+    {{ vidlink }}    - Direct link back to the source tweet
+    {{ vidurl }}     - Direct MP4 link to the video contained in the tweet
+    {{ desc }}       - Tweet Text
+    {{ url }}        - Base URL of the site hosting TwitFix
+    {{ urlDesc }}    - HTTP Encoded Tweet Text
+    {{ urlUser }}    - HTTP Encoded Username
+    {{ urlLink }}    - HTTP Encoded source link
+    {{ pfp }}        - URL of the posters PFP
+    {{ imagecount }} - Message that can contain the number of images in an album
  -->
 {% block head %}
     <meta content="text/html; charset=UTF-8"        http-equiv="Content-Type" />
@@ -26,10 +27,10 @@
 
     <meta property="og:description"                 content="{{ desc }}"  />
  
-    <link rel="alternate" href="{{ url }}/oembed.json?desc={{ urlUser }}&user=Twitter&link={{ urlLink }}&ttype=photo" type="application/json+oembed" title="{{ user }}">
-    <meta http-equiv = "refresh" content = "0; url = {{ tweetLink }}" />
+    <link rel="alternate" href="{{ url }}/oembed.json?desc={{ urlUser }}&user={{ imagecount }}&link={{ urlLink }}&ttype=photo" type="application/json+oembed" title="{{ user }}">
+    <meta http-equiv = "refresh" content = "0; url = {{ vidlink }}" />
 {% endblock %}
 
 {% block body %}
-Redirecting you to the tweet in a moment. <a href="{{ tweetLink }}">Or click here.</a>
+Redirecting you to the tweet in a moment. <a href="{{ vidlink }}">Or click here.</a>
 {% endblock %}
