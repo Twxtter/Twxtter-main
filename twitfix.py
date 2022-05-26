@@ -336,14 +336,7 @@ def twitfix(sub_path):
             )
 
     elif (
-        request.url.endswith("/1")
-        or request.url.endswith("/2")
-        or request.url.endswith("/3")
-        or request.url.endswith("/4")
-        or request.url.endswith("%2F1")
-        or request.url.endswith("%2F2")
-        or request.url.endswith("%2F3")
-        or request.url.endswith("%2F4")
+        request.url.endswith("/1", "/2", "/3", "/4", "%2F1", "%2F2", "%2F3", "%2F4")
     ):
         twitter_url = "https://twitter.com/" + sub_path
 
@@ -356,14 +349,7 @@ def twitfix(sub_path):
         return embed_video(clean, image)
 
     elif (
-        request.url.endswith("/1p")
-        or request.url.endswith("/2p")
-        or request.url.endswith("/3p")
-        or request.url.endswith("/4p")
-        or request.url.endswith("%2F1p")
-        or request.url.endswith("%2F2p")
-        or request.url.endswith("%2F3p")
-        or request.url.endswith("%2F4p")
+        request.url.endswith("/1p", "/2p", "/3p", "/4p", "%2F1p", "%2F2p", "%2F3p", "%2F4p")
     ):
         twitter_url = "https://twitter.com/" + sub_path
 
