@@ -286,22 +286,7 @@ def twitfix(sub_path):
     match = pathregex.search(sub_path)
     print(request.url)
 
-    if request.url.startswith(
-        "https://d.twx"
-    ):  # Matches d.fx? Try to give the user a direct link
-        if user_agent in generate_embed_user_agents:
-            print(" ➤ [ D ] d.twx link shown to discord user-agent!")
-            if request.url.endswith(".mp4") and "?" not in request.url:
-                return dl(sub_path)
-            else:
-                return message(
-                    "To use a direct MP4 link in discord, remove anything past '?' and put '.mp4' at the end"
-                )
-        else:
-            print(" ➤ [ R ] Redirect to MP4 using d.twxtter.com")
-            return dir(sub_path)
-
-    elif request.url.endswith(".mp4") or request.url.endswith("%2Emp4"):
+    if request.url.endswith(".mp4") or request.url.endswith("%2Emp4"):
         twitter_url = "https://twitter.com/" + sub_path
 
         if "?" not in request.url:
