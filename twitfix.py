@@ -783,10 +783,8 @@ def embed(video_link, vnf, image, raw=False):
     if vnf["type"] == "Text":  # Change the template based on tweet type
         template = "text.html"
     if vnf["type"] == "Image":
-        print(" ➤ [ T ] vnf type is Image")
-        if vnf["images"][4] != "1":
-            appNamePost = " - Image " + str(image+1) + "/" + str(vnf["images"][4])
-            print(f" ➤ [ T ] Setting appNamePost to {appNamePost}")
+        if vnf["images"][5] != "1":
+            appNamePost = " - Image " + str(image+1) + "/" + str(vnf["images"][5])
         image = vnf["images"][image]
         if raw == True:
             template = "img.html"
