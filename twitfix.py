@@ -609,7 +609,7 @@ def link_to_vnf_from_api(video_link):
         nsfw = tweet["possibly_sensitive"]
     else:
         nsfw = False
-
+    url = ""
     vnf = tweetInfo(
         url,
         video_link,
